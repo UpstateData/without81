@@ -1,9 +1,6 @@
 // Empty array to hold origin and destination locations.
 var locations = [];
 
-// Route 81 LinkIDs (tells MapQuest API to avoid these road segments in directions).
-var LinkIDs = [15138044,15008482,15144794,15094741,15185764,15219841,14881136];
-
 // Set up alternate sets of directions.
 var dir_with = MQ.routing.directions().on('success', function(data) {
   renderRouteNarrative(data, '#narrative-with');
@@ -41,14 +38,14 @@ $(document).ready(function() {
     locations.push(destination);
 
     // Directions WITH 81 as option.
-    dir_with.route({locations});
+    dir_with.route({locations, options: { routeType: 'fastest'}});
     layer_with = MQ.routing.routeLayer({
       directions: dir_with,
       fitBounds: true
     });
 
     // Directiond WITHOUT 81 as option.
-    dir_without.route({locations, options: { mustAvoidLinkIds: LinkIDs}});
+    dir_without.route({locations, options: { routeType: 'fastest', routeControlPointCollection: [{lat:43.03474,lng:-76.14298,weight:10,radius:1}] }});
     layer_without = MQ.routing.routeLayer({
       directions: dir_without,
       fitBounds: true
