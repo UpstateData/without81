@@ -71,15 +71,26 @@ function renderRouteNarrative(data, id) {
 
   var legs = data.route.legs, maneuvers;
   if (legs && legs.length) {
-      maneuvers = legs[0].maneuvers;
 
-      // Display specific steps for route.
-      var content = '<h3>Directions</h3>';
-      content += '<ul>';
-      for (var i=0; i < maneuvers.length; i++) {
-          content += '<li>' + maneuvers[i].narrative + '</li>';
-      }
-      content += '</ul>';
+    // For logging of locations entered by user.
+    var summary = {
+      id: id,
+      locations: data.route.locations,
+      time: data.route.time,
+      distance: data.route.distance,
+      fuelUsed: data.route.fuelUsed
+    }
+    _LTracker.push(summary);
+
+    maneuvers = legs[0].maneuvers;
+
+    // Display specific steps for route.
+    var content = '<h3>Directions</h3>';
+    content += '<ul>';
+    for (var i=0; i < maneuvers.length; i++) {
+        content += '<li>' + maneuvers[i].narrative + '</li>';
+    }
+    content += '</ul>';
   
   // Display duratsion components.
   content += '<h3>Duration</h3>';

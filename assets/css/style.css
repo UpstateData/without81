@@ -6,11 +6,14 @@ body {
   margin-top: 5px;
 }
 #map-with, #map-without {
-  width: 500px;
-  height: 500px;
+  width: 550px;
+  height: 350px;
+}
+#highlights {
+  margin-top: 5px;
+  padding: 5px;
 }
 #narrative-with, #narrative-without {
-  margin-top: 5px;
   padding: 5px;
 }
 .title {
@@ -19,4 +22,7 @@ body {
 }
 .input-group {
   padding: 10px;
+}
+.hide {
+  display: none;
 }
