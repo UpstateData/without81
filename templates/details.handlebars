@@ -1,0 +1,12 @@
+<h3>Trip Summary</h3>
+    <ul>
+        <li>Estimated time: <strong>{{{getMinutes Details.time}}} minutes</strong></li>
+        <li>Distance:  <strong>{{{roundNumber Details.distance}}} miles</strong></li>
+        <li>Fuel used: <strong>{{Details.fuelUsed}} gallons</strong></li>
+    </ul>
+<h3>Directions</h3>
+    <ul>
+        {{#each Details.maneuvers}}
+         <li>{{narrative}}</li>
+        {{/each}}
+    </ul>

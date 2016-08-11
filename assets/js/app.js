@@ -69,7 +69,7 @@ $(document).ready(function() {
 // Method to render the specific steps of a route.
 function renderRouteNarrative(data, id) {
 
-  var legs = data.route.legs, maneuvers;
+  var legs = data.route.legs;
   if (legs && legs.length) {
 
     // For logging of locations entered by user.
@@ -82,25 +82,17 @@ function renderRouteNarrative(data, id) {
     }
     _LTracker.push(summary);
 
-    // Display specific steps for route.
-    maneuvers = legs[0].maneuvers;
-    var content = '<h3>Directions</h3>';
-    content += '<ul>';
-    for (var i=0; i < maneuvers.length; i++) {
-        content += '<li>' + maneuvers[i].narrative + '</li>';
+    // Display duratsion components.
+    var details = {
+      time: data.route.time,
+      distance: data.route.distance,
+      fuelUsed: data.route.fuelUsed,
+      maneuvers: data.route.legs[0].maneuvers
     }
-    content += '</ul>';
-  
-  // Display duratsion components.
-  content += '<h3>Duration</h3>';
-  content += '<ul>';
-  content += '<li>Estimated time: ' + Math.round(data.route.time / 60) + ' minutes</li>';
-  content += '<li>Distance: ' + Math.round(data.route.distance) + ' miles</li>';
-  content += '<li>Fuel used: ' +data.route.fuelUsed + ' gallons</li>';
-  content += '</ul>';
-  }
+    content = Handlebars.templates.details({ Details : details });
 
   $(id).find('.content').append(content);
+}
 }
 
 // Method to remove route layers from map.
@@ -112,3 +104,11 @@ function removeLayers(map_with, map_without) {
     }
     return;
 }
+
+Handlebars.registerHelper('getMinutes', function(num) {
+  return Math.round(num/60);
+});
+
+Handlebars.registerHelper('roundNumber', function(num) {
+  return Math.round(num);
+});
