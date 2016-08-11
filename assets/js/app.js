@@ -82,9 +82,8 @@ function renderRouteNarrative(data, id) {
     }
     _LTracker.push(summary);
 
-    maneuvers = legs[0].maneuvers;
-
     // Display specific steps for route.
+    maneuvers = legs[0].maneuvers;
     var content = '<h3>Directions</h3>';
     content += '<ul>';
     for (var i=0; i < maneuvers.length; i++) {
@@ -97,6 +96,7 @@ function renderRouteNarrative(data, id) {
   content += '<ul>';
   content += '<li>Estimated time: ' + Math.round(data.route.time / 60) + ' minutes</li>';
   content += '<li>Distance: ' + Math.round(data.route.distance) + ' miles</li>';
+  content += '<li>Fuel used: ' +data.route.fuelUsed + ' gallons</li>';
   content += '</ul>';
   }
 
