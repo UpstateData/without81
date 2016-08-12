@@ -26,6 +26,11 @@ $(document).ready(function() {
     var map_with = L.map('map-with', options).addLayer(MQ.mapLayer());
     var map_without = L.map('map-without', options).addLayer(MQ.mapLayer());
 
+  $("#origin, #destination").autocomplete({
+    source: landmarks,
+    minLength: 2
+  });
+
   $('#route').click(function() {
 
     // If a route later exists, remove it before displaying a new one.
@@ -82,7 +87,7 @@ function renderRouteNarrative(data, id) {
     }
     _LTracker.push(summary);
 
-    // Display duratsion components.
+    // Display duration components.
     var details = {
       time: data.route.time,
       distance: data.route.distance,
@@ -105,10 +110,36 @@ function removeLayers(map_with, map_without) {
     return;
 }
 
+// Helper methods for handlebars.
 Handlebars.registerHelper('getMinutes', function(num) {
   return Math.round(num/60);
 });
-
 Handlebars.registerHelper('roundNumber', function(num) {
   return Math.round(num);
 });
+
+// A list of landmarks in CNY for autocomplete.
+var landmarks = [
+  'Carrier Dome, 900 Irving Ave, Syracuse, NY 13244',
+  'Hancock International Airport, 1000 Col Eileen Collins Blvd, Syracuse, NY 13212',
+  'Carousel Mall, 9090 Destiny USA Dr, Syracuse, NY 13204',
+  'Destiny USA, 9090 Destiny USA Dr, Syracuse, NY 13204',
+  'Museum of Science and Technology (MOST), 500 S Franklin St, Syracuse, NY 13202',
+  'Rosamond Gifford Zoo, One Conservation Pl, Syracuse, NY 13204',
+  'Everson Museum of Art, 401 Harrison St, Syracuse, NY 13202',
+  'Erie Canal Museum, 318 Erie Blvd E, Syracuse, NY 13202',
+  'NBT Bank Stadium, 1 Tex Simone Dr, Syracuse, NY 13208',
+  'Syracuse Chiefs Stadium, 1 Tex Simone Dr, Syracuse, NY 13208',
+  'Oncenter War Memorial Arena, 800 S State St, Syracuse, NY 13202',
+  'Landmark Theatre, 362 S Salina St, Syracuse, NY 13202',
+  'Onondaga Lake Park, 6851 Onondaga Lake Pkwy, Liverpool, NY 13088',
+  'Palace Theatre, 2384 James St, Syracuse, NY 13206',
+  'Oakwood Cemetery, 940 Comstock Ave, Syracuse, NY 13210',
+  'Clinton Square, 161 W Genesee St, Syracuse, NY 13202',
+  'NYS Fair, 581 State Fair Blvd, Syracuse, NY 13209',
+  'State Fair, 581 State Fair Blvd, Syracuse, NY 13209',
+  'Empire Expo Center, 581 State Fair Blvd, Syracuse, NY 13209',
+  'Thornden Park, Thornden Park Drive,, Syracuse, NY 13210',
+  'Elmwood Park, Glenwood Ave, Syracuse, NY 13207',
+  'Cathedral of the Immaculate Conception, 259 E Onondaga St, Syracuse, NY 13202'
+];
