@@ -1,13 +1,16 @@
 // Empty array to hold origin and destination locations.
 var locations = [];
 
+// A unique ID for this user.
+var user_guid = createGuid();
+
 // Set up alternate sets of directions.
 var dir_with = MQ.routing.directions().on('success', function(data) {
-  renderRouteNarrative(data, '#narrative-with');
+  renderRouteNarrative(data, '#narrative-with', user_guid);
 });
 
 var dir_without = MQ.routing.directions().on('success', function(data) {
-  renderRouteNarrative(data, '#narrative-without');
+  renderRouteNarrative(data, '#narrative-without', user_guid);
 });
 
 // Variables to hold route layers for alternate routes.
@@ -59,7 +62,7 @@ $(document).ready(function() {
     // Display both sets of directions.
     map_with.addLayer(layer_with);
     map_without.addLayer(layer_without);
-
+    
     // Reset locations array.
     locations = [];
 
@@ -72,14 +75,15 @@ $(document).ready(function() {
 });
 
 // Method to render the specific steps of a route.
-function renderRouteNarrative(data, id) {
+function renderRouteNarrative(data, id, user_guid) {
 
   var legs = data.route.legs;
   if (legs && legs.length) {
 
     // For logging of locations entered by user.
     var summary = {
-      id: id,
+      id: user_guid,
+      routeType: id,
       locations: data.route.locations,
       time: data.route.time,
       distance: data.route.distance,
@@ -108,6 +112,14 @@ function removeLayers(map_with, map_without) {
     map_without.removeLayer(layer_without);
     }
     return;
+}
+
+// Method to create a unique ID for use with logging routes.
+function createGuid() {
+    return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
+        var r = Math.random()*16|0, v = c === 'x' ? r : (r&0x3|0x8);
+        return v.toString(16);
+    });
 }
 
 // Helper methods for handlebars.
