@@ -156,5 +156,7 @@ var landmarks = [
   'Empire Expo Center, 581 State Fair Blvd, Syracuse, NY 13209',
   'Thornden Park, Thornden Park Drive,, Syracuse, NY 13210',
   'Elmwood Park, Glenwood Ave, Syracuse, NY 13207',
-  'Cathedral of the Immaculate Conception, 259 E Onondaga St, Syracuse, NY 13202'
+  'Cathedral of the Immaculate Conception, 259 E Onondaga St, Syracuse, NY 13202',
+  'Syracuse Coworks, 201 E Jefferson Street, Syracuse, NY 13202',
+  'The Tech Garden, 235 Harrison St, Syracuse, NY 13202'
 ];
