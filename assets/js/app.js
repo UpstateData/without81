@@ -7,6 +7,9 @@ var user_guid = createGuid();
 // Route 81 LinkIDs
 var LinkIDs = [15094736,15200823,15094745,15144798,15100642,15013067,15094764,15333497,15094757,15008482];
 
+// Route control point for Southbound 81 segment between E. Fayette & E. Water Streets
+var routeControlPoint = [ { lat:43.04798,lng:-76.14263,weight:6,radius:.2 } ];
+
 // Set up alternate sets of directions.
 var dir_with = MQ.routing.directions().on('success', function(data) {
   renderRouteNarrative(data, '#narrative-with', user_guid);
@@ -56,7 +59,7 @@ $(document).ready(function() {
     });
 
     // Directiond WITHOUT 81 as option.
-    dir_without.route({locations, options: {mustAvoidLinkIds: LinkIDs}});
+    dir_without.route({locations, options: {mustAvoidLinkIds: LinkIDs, routeControlPointCollection: routeControlPoint}});
     layer_without = MQ.routing.routeLayer({
       directions: dir_without,  
       fitBounds: true
