@@ -4,6 +4,9 @@ var locations = [];
 // A unique ID for this user.
 var user_guid = createGuid();
 
+// Route 81 LinkIDs
+var LinkIDs = [15094736,15200823,15094745,15144798,15100642,15013067,15094764,15333497,15094757,15008482];
+
 // Set up alternate sets of directions.
 var dir_with = MQ.routing.directions().on('success', function(data) {
   renderRouteNarrative(data, '#narrative-with', user_guid);
@@ -19,7 +22,7 @@ var layer_with, layer_without;
 // Map display options.
 var options = {
       center: [ 43.0501, -76.1491 ],
-      zoom: 13,
+      zoom: 12,
       scrollWheelZoom: false
 };
 
@@ -46,16 +49,16 @@ $(document).ready(function() {
     locations.push(destination);
 
     // Directions WITH 81 as option.
-    dir_with.route({locations, options: { routeType: 'fastest'}});
+    dir_with.route({locations});
     layer_with = MQ.routing.routeLayer({
       directions: dir_with,
       fitBounds: true
     });
 
     // Directiond WITHOUT 81 as option.
-    dir_without.route({locations, options: { routeType: 'fastest', routeControlPointCollection: [{lat:43.03474,lng:-76.14298,weight:10,radius:1}] }});
+    dir_without.route({locations, options: {mustAvoidLinkIds: LinkIDs}});
     layer_without = MQ.routing.routeLayer({
-      directions: dir_without,
+      directions: dir_without,  
       fitBounds: true
     });
 
