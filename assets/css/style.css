@@ -32,3 +32,8 @@ body {
 #more {
   text-align: center;
 }
+.note {
+  margin-top: 5px;
+  padding: 2px;
+  text-align: center;
+}
