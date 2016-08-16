@@ -162,6 +162,6 @@ var landmarks = [
   'Cathedral of the Immaculate Conception, 259 E Onondaga St, Syracuse, NY 13202',
   'Syracuse Coworks, 201 E Jefferson Street, Syracuse, NY 13202',
   'The Tech Garden, 235 Harrison St, Syracuse, NY 13202',
-  'Regional Training Center, 1 Walsh Cir, Syracuse, NY 13208',
+  'Regional Transportation Center, 1 Walsh Cir, Syracuse, NY 13208',
   'Amtrak Station, 1 Walsh Cir, Syracuse, NY 13208'
 ];
