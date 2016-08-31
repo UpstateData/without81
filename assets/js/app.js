@@ -31,6 +31,8 @@ var options = {
 
 $(document).ready(function() {
 
+  return;
+
     // Display maps
     var map_with = L.map('map-with', options).addLayer(MQ.mapLayer());
     var map_without = L.map('map-without', options).addLayer(MQ.mapLayer());
