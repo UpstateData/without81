@@ -31,8 +31,6 @@ var options = {
 
 $(document).ready(function() {
 
-  return;
-
     // Display maps
     var map_with = L.map('map-with', options).addLayer(MQ.mapLayer());
     var map_without = L.map('map-without', options).addLayer(MQ.mapLayer());
@@ -97,7 +95,6 @@ function renderRouteNarrative(data, id, user_guid) {
       distance: data.route.distance,
       fuelUsed: data.route.fuelUsed
     }
-    _LTracker.push(summary);
 
     // Display duration components.
     var details = {

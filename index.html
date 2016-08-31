@@ -47,17 +47,59 @@
       <div class="title">
         <h1>Getting Around Without 81</h1>
         <p class="lead">Travel in and around Central New York while avoiding Route 81 through Downtown Syracuse</p>
-        <p>This site is no longer active, but an example of how it was used can be seen below. To find out more about this project, <a href="about.html">go here</a>.</p>
       </div>
 
-      <div id="demo" class="well">
-        <img src="without81-example.gif"/>
-      </div>
-
-      <div class="note">
-        <p>If you're Interested in traveing witout 81, explore <a href="https://www.mapquest.com/directions">more routes</a> on Mapquest.</p>
-      </div>
-
+      <div class="row">
+        <div class="col-lg-5">
+          <div class="input-group">
+            <span class="input-group-addon">
+              Leaving from:
+            </span>
+            <input type="text" class="form-control ui-widget" id="origin" placeholder="5833 Meetinghouse Road, Tully">
+          </div><!-- /input-group -->
+        </div><!-- /.col-lg-5 -->
+        <div class="col-lg-5">
+          <div class="input-group">
+            <span class="input-group-addon">
+              Going to:
+            </span>
+            <input type="text" class="form-control ui-widget" id="destination" placeholder="246 W Willow St, Syracuse, NY, Syracuse">
+          </div><!-- /input-group -->
+        </div><!-- /.col-lg-5 -->
+        <div class="col-lg-2">
+          <div class="input-group">
+            <button class="btn btn-primary" id="route" type="button">Get directions</button>
+          </div>
+        </div>
+      </div><!-- /.row -->
+      <div class="row" id="maps">
+        <div class="col-lg-6">
+          <h3>Typical Route</h3>
+          <div id="map-with"></div>
+          <p class="note">Route <strong>includes</strong> 81 through Downtown Syracuse (if applicable)</p>
+          <div id="narrative-with">
+            <div class="content"></div>
+          </div>
+        </div>
+        <div class="col-lg-6">
+          <h3>Route Without 81</h3>
+          <div id="map-without"></div>
+          <p class="note">Route <strong>avoids</strong> segment of 81 through Downtown Syracuse</p>
+          <div id="narrative-without">
+            <div class="content"></div>
+          </div>
+        </div>
+      </div><!-- /.row -->
+      
     </div><!-- /.container -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/leaflet.js"></script>
+    <script src="https://www.mapquestapi.com/sdk/leaflet/v2.2/mq-map.js?key=7k6uksN6kgVX09UkHPPkGKmAa7Hc0ZZA"></script>
+    <script src="https://www.mapquestapi.com/sdk/leaflet/v2.2/mq-routing.js?key=7k6uksN6kgVX09UkHPPkGKmAa7Hc0ZZA"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="http://code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.2/handlebars.runtime.js"/></script>
+    <script src="assets/js/app.js"></script>
+    <script src="assets/js/detail.tpl.js"></script>
   </body>
 </html>
