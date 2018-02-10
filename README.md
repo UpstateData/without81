@@ -2,6 +2,8 @@
 
 Get travels directions in Central New York while avoiding Route 81 through Downtown Syracuse.
 
+**Note - this project is not actively maintained and the site may not work due to changes in some of the underlying APIs.**
+
 ## Purpose
 
 Interstate 81 through the City of Syracuse has reached the end of its usable life and [replacement options](https://www.dot.ny.gov/i81opportunities) are being discussed by political and community leaders. As people in Central New York consider the impact of the I 81 replacement project, much of the debate has revolved around the [impact on commuters and businesses](http://www.syracuse.com/news/index.ssf/2015/03/interstate_81_rebuild_labor_unions_urge_dot_to_include_tunnel-boulevard_plan_as.html) that might be affected by the project.
