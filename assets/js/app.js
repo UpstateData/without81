@@ -5,17 +5,17 @@ var locations = [];
 var user_guid = createGuid();
 
 // Route 81 LinkIDs
-var LinkIDs = [15094736,15200823,15094745,15144798,15100642,15013067,15094764,15333497,15094757,15008482];
+var LinkIDs = [15094736, 15200823, 15094745, 15144798, 15100642, 15013067, 15094764, 15333497, 15094757, 15008482];
 
 // Route control point for Southbound 81 segment between E. Fayette & E. Water Streets
-var routeControlPoint = [ { lat:43.04798,lng:-76.14263,weight:6,radius:.2 } ];
+var routeControlPoint = [{ lat: 43.04798, lng: -76.14263, weight: 6, radius: .2 }];
 
 // Set up alternate sets of directions.
-var dir_with = MQ.routing.directions().on('success', function(data) {
+var dir_with = MQ.routing.directions().on('success', function (data) {
   renderRouteNarrative(data, '#narrative-with', user_guid);
 });
 
-var dir_without = MQ.routing.directions().on('success', function(data) {
+var dir_without = MQ.routing.directions().on('success', function (data) {
   renderRouteNarrative(data, '#narrative-without', user_guid);
 });
 
@@ -24,23 +24,23 @@ var layer_with, layer_without;
 
 // Map display options.
 var options = {
-      center: [ 43.0501, -76.1491 ],
-      zoom: 12,
-      scrollWheelZoom: false
+  center: [43.0501, -76.1491],
+  zoom: 12,
+  scrollWheelZoom: false
 };
 
-$(document).ready(function() {
+$(document).ready(function () {
 
-    // Display maps
-    var map_with = L.map('map-with', options).addLayer(MQ.mapLayer());
-    var map_without = L.map('map-without', options).addLayer(MQ.mapLayer());
+  // Display maps
+  var map_with = L.map('map-with', options).addLayer(MQ.mapLayer());
+  var map_without = L.map('map-without', options).addLayer(MQ.mapLayer());
 
   $("#origin, #destination").autocomplete({
     source: landmarks,
     minLength: 2
   });
 
-  $('#route').click(function() {
+  $('#route').click(function () {
 
     // If a route later exists, remove it before displaying a new one.
     removeLayers(map_with, map_without);
@@ -51,30 +51,30 @@ $(document).ready(function() {
     locations.push(origin);
     locations.push(destination);
 
-    // Directions WITH 81 as option.
-    dir_with.route({locations});
+    // Directions with 81 as option.
+    dir_with.route({ locations });
     layer_with = MQ.routing.routeLayer({
       directions: dir_with,
       fitBounds: true
     });
 
-    // Directiond WITHOUT 81 as option.
-    dir_without.route({locations, options: {mustAvoidLinkIds: LinkIDs, routeControlPointCollection: routeControlPoint}});
+    // Directions without 81 as option.
+    dir_without.route({ locations, options: { mustAvoidLinkIds: LinkIDs, routeControlPointCollection: routeControlPoint } });
     layer_without = MQ.routing.routeLayer({
-      directions: dir_without,  
+      directions: dir_without,
       fitBounds: true
     });
 
     // Display both sets of directions.
     map_with.addLayer(layer_with);
     map_without.addLayer(layer_without);
-    
+
     // Reset locations array.
     locations = [];
 
   });
 
-  $('#home').click(function() {
+  $('#home').click(function () {
     removeLayers(map_with, map_without);
   });
 
@@ -103,35 +103,35 @@ function renderRouteNarrative(data, id, user_guid) {
       fuelUsed: data.route.fuelUsed,
       maneuvers: data.route.legs[0].maneuvers
     }
-    content = Handlebars.templates.details({ Details : details });
+    content = Handlebars.templates.details({ Details: details });
 
-  $(id).find('.content').append(content);
-}
+    $(id).find('.content').append(content);
+  }
 }
 
 // Method to remove route layers from map.
 function removeLayers(map_with, map_without) {
-  if(layer_with || layer_without) {
+  if (layer_with || layer_without) {
     $('.content').empty();
     map_with.removeLayer(layer_with);
     map_without.removeLayer(layer_without);
-    }
-    return;
+  }
+  return;
 }
 
 // Method to create a unique ID for use with logging routes.
 function createGuid() {
-    return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
-        var r = Math.random()*16|0, v = c === 'x' ? r : (r&0x3|0x8);
-        return v.toString(16);
-    });
+  return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) {
+    var r = Math.random() * 16 | 0, v = c === 'x' ? r : (r & 0x3 | 0x8);
+    return v.toString(16);
+  });
 }
 
 // Helper methods for handlebars.
-Handlebars.registerHelper('getMinutes', function(num) {
-  return Math.round(num/60);
+Handlebars.registerHelper('getMinutes', function (num) {
+  return Math.round(num / 60);
 });
-Handlebars.registerHelper('roundNumber', function(num) {
+Handlebars.registerHelper('roundNumber', function (num) {
   return Math.round(num);
 });
 
