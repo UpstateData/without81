@@ -1,22 +1,24 @@
 // Empty array to hold origin and destination locations.
 var locations = [];
 
-// A unique ID for this user.
-var user_guid = createGuid();
-
 // Route 81 LinkIDs
 var LinkIDs = [15094736, 15200823, 15094745, 15144798, 15100642, 15013067, 15094764, 15333497, 15094757, 15008482];
 
 // Route control point for Southbound 81 segment between E. Fayette & E. Water Streets
-var routeControlPoint = [{ lat: 43.04798, lng: -76.14263, weight: 6, radius: .2 }];
+var routeControlPoint = [{
+  lat: 43.04798,
+  lng: -76.14263,
+  weight: 6,
+  radius: 0.2
+}];
 
 // Set up alternate sets of directions.
 var dir_with = MQ.routing.directions().on('success', function (data) {
-  renderRouteNarrative(data, '#narrative-with', user_guid);
+  renderRouteNarrative(data, '#narrative-with');
 });
 
 var dir_without = MQ.routing.directions().on('success', function (data) {
-  renderRouteNarrative(data, '#narrative-without', user_guid);
+  renderRouteNarrative(data, '#narrative-without');
 });
 
 // Variables to hold route layers for alternate routes.
@@ -45,21 +47,29 @@ $(document).ready(function () {
     // If a route later exists, remove it before displaying a new one.
     removeLayers(map_with, map_without);
 
-    // Get the origin and destinate entered by the user.
+    // Get the origin and destination entered by the user.
     var origin = $('#origin').val() || $('#origin').attr('placeholder');
     var destination = $('#destination').val() || $('#destination').attr('placeholder');
     locations.push(origin);
     locations.push(destination);
 
     // Directions with 81 as option.
-    dir_with.route({ locations });
+    dir_with.route({
+      locations
+    });
     layer_with = MQ.routing.routeLayer({
       directions: dir_with,
       fitBounds: true
     });
 
     // Directions without 81 as option.
-    dir_without.route({ locations, options: { mustAvoidLinkIds: LinkIDs, routeControlPointCollection: routeControlPoint } });
+    dir_without.route({
+      locations,
+      options: {
+        mustAvoidLinkIds: LinkIDs,
+        routeControlPointCollection: routeControlPoint
+      }
+    });
     layer_without = MQ.routing.routeLayer({
       directions: dir_without,
       fitBounds: true
@@ -81,20 +91,10 @@ $(document).ready(function () {
 });
 
 // Method to render the specific steps of a route.
-function renderRouteNarrative(data, id, user_guid) {
+function renderRouteNarrative(data, id) {
 
   var legs = data.route.legs;
   if (legs && legs.length) {
-
-    // For logging of locations entered by user.
-    var summary = {
-      id: user_guid,
-      routeType: id,
-      locations: data.route.locations,
-      time: data.route.time,
-      distance: data.route.distance,
-      fuelUsed: data.route.fuelUsed
-    }
 
     // Display duration components.
     var details = {
@@ -103,7 +103,9 @@ function renderRouteNarrative(data, id, user_guid) {
       fuelUsed: data.route.fuelUsed,
       maneuvers: data.route.legs[0].maneuvers
     }
-    content = Handlebars.templates.details({ Details: details });
+    content = Handlebars.templates.details({
+      Details: details
+    });
 
     $(id).find('.content').append(content);
   }
@@ -122,7 +124,8 @@ function removeLayers(map_with, map_without) {
 // Method to create a unique ID for use with logging routes.
 function createGuid() {
   return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) {
-    var r = Math.random() * 16 | 0, v = c === 'x' ? r : (r & 0x3 | 0x8);
+    var r = Math.random() * 16 | 0,
+      v = c === 'x' ? r : (r & 0x3 | 0x8);
     return v.toString(16);
   });
 }
