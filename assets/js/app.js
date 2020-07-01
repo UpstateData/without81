@@ -1,8 +1,8 @@
 // Empty array to hold origin and destination locations.
 var locations = [];
 
-// Route 81 LinkIDs
-var LinkIDs = [4305966,3964892,34222430,14689841,29658617,16808971,1791178,9915231,712160,1431028141117045,43179443,32891652,58099009,30606615,63397487,6277076,3577250,37998013];
+// Route 81 LinkIDs.
+var LinkIDs = [4305966, 3964892, 34222430, 14689841, 29658617, 16808971, 1791178, 9915231, 712160, 1431028141117045, 43179443, 32891652, 58099009, 30606615, 63397487, 6277076, 3577250, 37998013];
 
 // Route control point for Southbound 81 segment between E. Fayette & E. Water Streets
 var routeControlPoint = [{
@@ -119,15 +119,6 @@ function removeLayers(map_with, map_without) {
     map_without.removeLayer(layer_without);
   }
   return;
-}
-
-// Method to create a unique ID for use with logging routes.
-function createGuid() {
-  return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) {
-    var r = Math.random() * 16 | 0,
-      v = c === 'x' ? r : (r & 0x3 | 0x8);
-    return v.toString(16);
-  });
 }
 
 // Helper methods for handlebars.
