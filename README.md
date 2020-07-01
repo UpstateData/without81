@@ -2,7 +2,7 @@
 
 Get travels directions in Central New York while avoiding Route 81 through Downtown Syracuse.
 
-**Note - this project is not actively maintained and the site may not work due to changes in some of the underlying APIs.**
+**Note - this project is not actively maintained and the site may not work due to [changes in some of the underlying APIs](https://github.com/code-for-syracuse/without81/issues/17).**
 
 ## Purpose
 
